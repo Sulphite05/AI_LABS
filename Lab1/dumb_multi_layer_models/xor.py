@@ -22,6 +22,6 @@ first = first_out.training()
 second = second_out.training()
 final = final_out.training()
 
-print(f"AB': {first}\nA'B: {second}\nor: {final}\nxor: {first+second+final}\n")
+print(f"AB': {first}\nA'B: {second}\nor: {final}\nxor: {max(first,second)+final}\n")
 
 

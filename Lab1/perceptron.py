@@ -20,26 +20,22 @@ class Perceptron:
         K = [0] * length
         Y = [0] * length
         D = [1] * length
-        weights = []
-        
-        for i in range(len(self.weights)):
-            weights.append([self.weights[i]] * length)
 
         iterations = 0
-        while sum(D) and iterations < 10:
+        while sum(D) and iterations < 11:
 
             for i in range(length):
                 weighted_input = 0
 
-                for input in range(self.num_of_inputs):
-                    weighted_input += self.inputs[input][i] * weights[input][i]
+                for input_num in range(self.num_of_inputs):
+                    weighted_input += self.inputs[input_num][i] * self.weights[input_num]
 
                 K[i] = weighted_input + self.bias
                 Y[i] = 1 if K[i] >= self.threshold else 0
                 D[i] = self.output[i] - Y[i]
 
-                for input in range(self.num_of_inputs):
-                    weights[input][i] = weights[input][i] + self.learning_rate * D[i] * self.inputs[input][i]
+                for input_num in range(self.num_of_inputs):
+                    self.weights[input_num] = self.weights[input_num] + self.learning_rate * D[i] * self.inputs[input_num][i]
 
             iterations += 1
         

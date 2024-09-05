@@ -22,8 +22,7 @@ class Perceptron:
         D = [1] * length
 
         iterations = 0
-        while sum(D) and iterations < 11:
-
+        while set(D) != {0} and iterations < 17:
             for i in range(length):
                 weighted_input = 0
 
@@ -36,7 +35,6 @@ class Perceptron:
 
                 for input_num in range(self.num_of_inputs):
                     self.weights[input_num] = self.weights[input_num] + self.learning_rate * D[i] * self.inputs[input_num][i]
-
             iterations += 1
         
         return iterations

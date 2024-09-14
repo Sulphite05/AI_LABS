@@ -1,7 +1,7 @@
 from Lab1.perceptron import Perceptron
 
-weight1 = 0.1
-weight2 = 0.1
+weight1 = -0.3
+weight2 = -0.5
 input1 = [0, 0, 1, 1]
 input2 = [0, 1, 0, 1]
 output = [int(a or b) for a, b in zip(input1, input2)]

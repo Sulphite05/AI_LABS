@@ -35,6 +35,10 @@ class Perceptron:
 
                 for input_num in range(self.num_of_inputs):
                     self.weights[input_num] = self.weights[input_num] + self.learning_rate * D[i] * self.inputs[input_num][i]
+                print(self.weights)
             iterations += 1
+            print(K)
+            print(D)
+            print()
         
         return iterations

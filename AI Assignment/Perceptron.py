@@ -3,3 +3,8 @@
 # algorithm must be capable of running perceptron learning algorithm and train the model. After
 # training the user may be able to feed testing inputs and the algorithm may be able to generate output
 # approximating the function. Show the practical demonstration to course instructor.
+
+
+# must include at least two hidden layers
+# Use of libraries is not allowed
+

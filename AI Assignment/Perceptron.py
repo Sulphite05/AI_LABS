@@ -2,50 +2,73 @@
 # learning rate and input table from user (input table may be two input table of any logical gate). The
 # algorithm must be capable of running perceptron learning algorithm and train the model. After
 # training the user may be able to feed testing inputs and the algorithm may be able to generate output
-# approximating the function. Show the practical demonstration to course instructor.
+# approximating the function. Show the practical demonstration to course instructor. [Marks: 1]
+
+import numpy as np
+
 
 class Perceptron:
-    def __init__(self, num_of_inputs, inputs, output, weights, learning_rate=0.2, bias=0, threshold=0.5):
-        self.num_of_inputs = num_of_inputs
-        self.inputs = inputs
-        self.output = output
+    def __init__(self, weights, learning_rate=0.01, epochs=1000):
         self.weights = weights
+        self.bias = 0
         self.learning_rate = learning_rate
-        self.bias = bias
-        self.threshold = threshold
+        self.epochs = epochs
 
-    def testing(self):
-        length = len(self.output)
-        assert self.num_of_inputs == len(self.inputs) == len(self.weights)
-        for i in range(self.num_of_inputs):
-            assert len(self.inputs[i]) == length
+    def activation_function(self, x):
+        return 1 if x >= 0 else 0
 
-    def training(self):
-        length = len(self.output)
-        self.testing()
-        K = [0] * length
-        Y = [0] * length
-        D = [1] * length
+    def predict(self, x):
+        # Weighted sum (linear combination of inputs and weights) + bias
+        z = np.dot(x, self.weights) + self.bias
+        return self.activation_function(z)
 
-        iterations = 0
-        while set(D) != {0} and iterations < 17:
-            for i in range(length):
-                weighted_input = 0
+    def train(self, X, y):
+        for epoch in range(self.epochs):
+            for xi, target in zip(X, y):
+                prediction = self.predict(xi)
+                update = self.learning_rate * (target - prediction)
+                self.weights += update * xi
+                self.bias += update
 
-                for input_num in range(self.num_of_inputs):
-                    weighted_input += self.inputs[input_num][i] * self.weights[input_num]
+    def test(self, X):
+        return [self.predict(xi) for xi in X]
 
-                K[i] = weighted_input + self.bias
-                Y[i] = 1 if K[i] >= self.threshold else 0
-                D[i] = self.output[i] - Y[i]
 
-                for input_num in range(self.num_of_inputs):
-                    self.weights[input_num] = self.weights[input_num] + self.learning_rate * D[i] * \
-                                              self.inputs[input_num][i]
-                print(self.weights)
-            iterations += 1
-            print(K)
-            print(D)
-            print()
+w1 = float(input("Enter initial weight 1: "))
+w2 = float(input("Enter initial weight 2: "))
+l_r = float(input("Enter the learning rate: "))
 
-        return iterations
+get = "Y"
+X_train = []
+
+while get.upper() == "Y":
+    inp = eval(input("Enter two training inputs in the form e.g. [0, 0]: "))
+    X_train.append(inp)
+    get = input("More entries(Y/N)? ")
+
+Y_train = []
+for i in range(len(X_train)):
+    out = int(input(f"Enter output for {X_train[i]}: "))
+    Y_train.append(out)
+
+X_train = np.array(X_train)
+y_train = np.array(Y_train)
+
+
+perceptron = Perceptron(weights=[w1, w2], learning_rate=l_r, epochs=10)
+
+perceptron.train(X_train, y_train)
+
+get = "Y"
+
+X_test = []
+while get.upper() == "Y":
+    inp = eval(input("Enter two testing inputs in the form e.g. [0, 0]: "))
+    X_test.append(inp)
+    get = input("More entries(Y/N)? ")
+
+
+X_test = np.array(X_test)
+predictions = perceptron.test(X_test)
+print("Predictions:", predictions)
+

@@ -10,11 +10,20 @@ visited = set()
 
 
 def dfs(ele):
-    if ele not in visited:
-        print(ele)
-        visited.add(ele)
-        for node in graph[ele]:
-            dfs(node)
+    st = [ele]
+    while st:
+        get = st.pop()
+        if get not in visited:
+            st += graph[get][::-1]
+            print(get)
+            visited.add(get)
 
 
 dfs('5')
+
+# 5
+# 3
+# 2
+# 4
+# 8
+# 7

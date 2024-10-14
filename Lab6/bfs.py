@@ -12,6 +12,8 @@ visited = set()
 
 while queue:
     get = queue.pop()
-    print(get)
-    for i in graph[get]:
-        queue.insert(0, i)
+    if get not in visited:
+        print(get)
+        visited.add(get)
+        for i in graph[get]:
+            queue.insert(0, i)

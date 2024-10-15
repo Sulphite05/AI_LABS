@@ -108,10 +108,10 @@ print("Predictions:", rounded_predictions.flatten())
 # ])
 #
 # # Initialize the neural network with 2 inputs, 2 hidden layers (2 neurons each), and 1 output
-# mlp = MultilayerPerceptron(input_size=2, hidden_size=2, output_size=1, learning_rate=0.1, epochs=10000)
+# mlp.py = MultilayerPerceptron(input_size=2, hidden_size=2, output_size=1, learning_rate=0.1, epochs=10000)
 #
 # # Train the model
-# mlp.train(X_train, y_train)
+# mlp.py.train(X_train, y_train)
 #
 # # Hardcoded testing inputs
 # X_test = np.array([
@@ -122,7 +122,7 @@ print("Predictions:", rounded_predictions.flatten())
 # ])
 #
 # # Predict and print results for test data
-# predictions = mlp.predict(X_test)
+# predictions = mlp.py.predict(X_test)
 # # Round predictions to the nearest integer (since it's a logical gate, we expect 0 or 1)
 # rounded_predictions = np.round(predictions).astype(int)
 # print("Predictions:", rounded_predictions.flatten())

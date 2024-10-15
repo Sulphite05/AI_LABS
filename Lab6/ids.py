@@ -6,10 +6,7 @@ graph = {
     '4': ['8'],
     '8': [],
 }
-
-
 def ids(start_node, max_depth):
-
     def dls(node, depth):
         if depth == 0:
             return [node]
@@ -27,6 +24,4 @@ def ids(start_node, max_depth):
             if node not in visited_at_depth:
                 print(node)
                 visited_at_depth.add(node)
-
-
 ids('5', 4)

@@ -138,7 +138,7 @@ trained_parameters = model(X, Y, n_x, n_h, n_y, num_of_iters,
 learning_rate)
 # Test 2X1 vector to calculate the XOR of its elements.
 # Try (0, 0), (0, 1), (1, 0), (1, 1)
-X_test = np.array([[1], [1]])
+X_test = np.array([[0], [0]])
 y_predict = predict(X_test, trained_parameters)
 print('Neural Network prediction for example ({:d}, {:d}) is {:d} '.format(
 X_test[0][0], X_test[1][0], y_predict))

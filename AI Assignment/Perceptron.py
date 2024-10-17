@@ -8,30 +8,32 @@ import numpy as np
 
 
 class Perceptron:
-    def __init__(self, weights, learning_rate=0.01, epochs=1000):
+
+    def __init__(self, weights, learning_rate, epochs):
         self.weights = weights
-        self.bias = 0
         self.learning_rate = learning_rate
         self.epochs = epochs
+        self.bias = 0
 
-    def activation_function(self, x):
-        return 1 if x >= 0 else 0
+    @staticmethod
+    def binary_step(x):
+        predictions = x >= 0.5
+        return predictions.astype(int)
 
-    def predict(self, x):
-        # Weighted sum (linear combination of inputs and weights) + bias
-        z = np.dot(x, self.weights) + self.bias
-        return self.activation_function(z)
-
-    def train(self, X, y):
-        for epoch in range(self.epochs):
-            for xi, target in zip(X, y):
-                prediction = self.predict(xi)
-                update = self.learning_rate * (target - prediction)
-                self.weights += update * xi
+    def train(self, X, Y):
+        for epoch in range(self.epochs + 1):
+            for x, y in zip(X, Y):
+                z = self.predict(x)
+                update = self.learning_rate * (y - z)
+                self.weights += update * x
                 self.bias += update
 
+    def predict(self, X):
+        Z = np.dot(X, self.weights) + self.bias
+        return self.binary_step(Z)
+
     def test(self, X):
-        return [self.predict(xi) for xi in X]
+        return [self.predict(x) for x in X]
 
 
 w1 = float(input("Enter initial weight 1: "))
@@ -41,11 +43,13 @@ l_r = float(input("Enter the learning rate: "))
 get = "Y"
 X_train = []
 
+print("\nOR GATE IMPLEMENTATION\n")
 while get.upper() == "Y":
     inp = eval(input("Enter two training inputs in the form e.g. [0, 0]: "))
     X_train.append(inp)
     get = input("More entries(Y/N)? ")
 
+print()
 Y_train = []
 for i in range(len(X_train)):
     out = int(input(f"Enter output for {X_train[i]}: "))
@@ -61,6 +65,7 @@ perceptron.train(X_train, y_train)
 
 get = "Y"
 
+print()
 X_test = []
 while get.upper() == "Y":
     inp = eval(input("Enter two testing inputs in the form e.g. [0, 0]: "))
@@ -70,5 +75,5 @@ while get.upper() == "Y":
 
 X_test = np.array(X_test)
 predictions = perceptron.test(X_test)
-print("Predictions:", predictions)
+print("\nPredictions:", predictions)
 

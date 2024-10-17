@@ -1,26 +1,3 @@
-# import numpy as np
-#
-#
-# class MultiLayerPerceptron:
-#     def __init__(self, input_size, output_size, hl_size, lr):
-#         self.input_size = input_size
-#         self.output_size = output_size
-#         self.hl_size = hl_size
-#         self.lr = lr
-#         self.input_hidden_weights = np.random.rand(input_size, hl_size)
-#         self.hidden_output_weights = np.random.rand(hl_size, output_size)
-#         self.bias_hidden = np.random.rand(hl_size)
-#         self.bias_output = np.random.rand(output_size)
-#         self.epochs = 1000
-#
-#     def train(self, X, y):
-#         for epoch in range(self.epochs):
-#             output = self.back_propogation()
-#
-#
-# inp = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-# out = np.array([0, 1, 1, 0])
-
 import numpy as np
 
 def sigmoid(z):

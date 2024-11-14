@@ -70,8 +70,8 @@ def update_parameters(parameters, grads, learning_rate):
     new_parameters = {
     "W1": W1,
     "W2": W2,
-    "b1" : b1,
-    "b2" : b2
+    "b1": b1,
+    "b2": b2
     }
     return new_parameters
 
@@ -81,7 +81,7 @@ def model(X, Y, n_x, n_h, n_y, num_of_iters, learning_rate):
     for i in range(0, num_of_iters+1):
         a2, cache = forward_propagation(X, parameters)
         grads = backward_propagation(X, Y, cache, parameters)
-        parameters = update_parameters(parameters, grads,learning_rate)
+        parameters = update_parameters(parameters, grads, learning_rate)
 
     return parameters
 
@@ -98,20 +98,19 @@ print()
 hl_w = float(input("Enter initial weights for the hidden layer: "))
 out_w = float(input("Enter initial weights for the output layer: "))
 
-print("\nXNOR IMPLEMENTATION\n")
-X = []
-get = "Y"
-while get.upper() == "Y":
-    inp = eval(input("Enter two training inputs in the form e.g. [0, 0]: "))
-    X.append(inp)
-    get = input("More entries(Y/N)? ")
+
+X = [[0, 0], [0, 1], [1, 0], [1, 1]]
 
 
 print()
 Y_train = []
-for i in range(len(X)):
-    out = int(input(f"Enter output for {X[i]}: "))
-    Y_train.append(out)
+
+
+num = int(input('Which gate do you want to train the model for?\n1. XOR\n2. XNOR\n'))
+if num == 1:
+    Y_train = [0, 1, 1, 0]
+else:
+    Y_train = [1, 0, 0, 1]
 
 X = np.array(X).T
 Y = np.array([Y_train])
@@ -137,3 +136,15 @@ for x1, x2 in X_test:
     predictions = predict([[x1], [x2]], trained_parameters)
     rounded_predictions = np.round(predictions).astype(int)
     print(f"Prediction for ({x1}, {x2}): ", rounded_predictions.flatten())
+
+
+# print("\nXNOR IMPLEMENTATION\n")
+# for i in range(len(X)):
+#     out = int(input(f"Enter output for {X[i]}: "))
+#     Y_train.append(out)
+
+# get = "Y"
+# while get.upper() == "Y":
+#     inp = eval(input("Enter two training inputs in the form e.g. [0, 0]: "))
+#     X.append(inp)
+#     get = input("More entries(Y/N)? ")

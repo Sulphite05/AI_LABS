@@ -41,23 +41,25 @@ w2 = float(input("Enter initial weight 2: "))
 l_r = float(input("Enter the learning rate: "))
 
 get = "Y"
-X_train = []
+X_train = [[0, 0], [0, 1], [1, 0], [1, 1]]
 
-print("\nOR GATE IMPLEMENTATION\n")
-while get.upper() == "Y":
-    inp = eval(input("Enter two training inputs in the form e.g. [0, 0]: "))
-    X_train.append(inp)
-    get = input("More entries(Y/N)? ")
 
-print()
-Y_train = []
-for i in range(len(X_train)):
-    out = int(input(f"Enter output for {X_train[i]}: "))
-    Y_train.append(out)
+num = int(input('Which gate do you want to train the model for?\n1. And\n2. Or\n3. Not\n4. Nand\n5. Nor\n'))
+if num == 1:
+    Y_train = [0, 0, 0, 1]
+elif num == 2:
+    Y_train = [0, 1, 1, 1]
+elif num == 3:
+    X_train = [[0], [1]]
+    Y_train = [0, 0, 0, 1]
+elif num == 4:
+    Y_train = [1, 1, 1, 0]
+else:
+    Y_train = [1, 0, 0, 0]
+
 
 X_train = np.array(X_train)
 y_train = np.array(Y_train)
-
 
 perceptron = Perceptron(weights=[w1, w2], learning_rate=l_r, epochs=10)
 
@@ -72,8 +74,19 @@ while get.upper() == "Y":
     X_test.append(inp)
     get = input("More entries(Y/N)? ")
 
-
 X_test = np.array(X_test)
 predictions = perceptron.test(X_test)
-print("\nPredictions:", predictions)
 
+for inp, out in zip(X_train, predictions):
+    print(f"\nPrediction for {inp}:", out)
+
+
+# print("\nOR GATE IMPLEMENTATION\n")
+# while get.upper() == "Y":
+#     inp = eval(input("Enter two training inputs in the form e.g. [0, 0]: "))
+#     X_train.append(inp)
+#     get = input("More entries(Y/N)? ")
+
+# for i in range(len(X_train)):
+#     out = int(input(f"Enter output for {X_train[i]}: "))
+#     Y_train.append(out)
